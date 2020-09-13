@@ -1,9 +1,8 @@
-version: '3.1'
+version: '3.5'
 
 services:
   postgres:
     image: postgres:10.4
-    container_name: postgre10.4_container
     environment:
        POSTGRES_USER: admin
        POSTGRES_PASS: admin
@@ -11,7 +10,7 @@ services:
       - ~/docker/postgreSqlApp/postgre-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    restart: always 
+    restart: unless-stopped 
 
   pgadmin:
     image: dpage/pgadmin4
@@ -21,8 +20,8 @@ services:
       PGADMIN_DEFAULT_EMAIL: pgadmin@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: admin
     volumes:
-      - ~/docker/postgeSqlApp/pgadmin:/root/.pgadmin
-    restart: always
+      - ~/docker/postgreSqlApp/pgadmin:/root/.pgadmin
+    restart: unless-stopped
 
 volumes:
   postgres-data:
